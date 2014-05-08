@@ -1,7 +1,9 @@
 This was my Final Project for my Database Design Class.
 
-I had to design, build, populate, and test a database for a Catering Company. The entire project is in the PDF file named IT450FINALRYANELLORIN which includes the ERD, Relational Schema, Create Table Statements, and the SQL Queries I tested.
+I had to design, build, populate, and test a database for a Catering Company. 
 
-The other PDF is the populated test data. Each individual file is the insert statements for the test data.
+The Create Table statements are in IT450Final_Statements_plain and the Populated Sample Data is in IT450_ALLINSERTSTATEMENTS.
+
+The entire project is in the PDF file named IT450FINALRYANELLORIN which includes the ERD, Relational Schema, Create Table Statements, and the SQL Queries I tested. The other PDF is the populated test data. Each individual file is the insert statements for the test data.
 
 The Database was created through Oracle.
