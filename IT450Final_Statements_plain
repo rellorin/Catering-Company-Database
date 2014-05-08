@@ -109,18 +109,3 @@ create table EVENT_STAFF(
 );
 
 
-
-
-////////////////////////////////////
-
-drop table customers;
-drop table invoice;
-drop table catering_event;
-drop table line_item;
-drop table event_staff;
-drop table staff;
-drop table skill;
-drop table tempagency;
-drop table part_time;
-drop table full_time;
-drop table products;
