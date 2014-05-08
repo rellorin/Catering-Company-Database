@@ -1,0 +1,126 @@
+create table CUSTOMERS(
+	CUST_ID varchar(10) not null,
+	FNAME varchar(25) not null,
+	LNAME varchar(25) not null,
+	ADDRESS varchar(50),
+	CITY varchar(25),
+	STATE char(2),
+	ZIP char(5),
+	HPHONE char(14),
+	CPHONE char(14),
+	EMAIL varchar(50),
+	CONSTRAINT CUSTOMERS_pk PRIMARY KEY (CUST_ID)
+); --CUSTOMERS start from 1
+
+create table CATERING_EVENT(
+	EVENT_ID varchar(10) not null,
+	EVENT_DATE date,
+	LOCATION varchar(50),
+	CUST_ID varchar(10), --FK
+	CONSTRAINT CATERING_EVENT_pk PRIMARY KEY (EVENT_ID),
+	CONSTRAINT CATERING_EVENT_Custfk
+		FOREIGN KEY (CUST_ID)
+		REFERENCES CUSTOMERS(CUST_ID)
+		ON DELETE SET NULL;
+); --CATERING_EVENT start from 101
+
+create table INVOICE(
+	INVOICE_NUM varchar(10) not null, 
+	INVOICE_DATE date not null, 
+	EVENT_ID varchar(10),
+	CONSTRAINT INVOICE_pk PRIMARY KEY  (INVOICE_NUM,EVENT_ID),
+	CONSTRAINT INVOICE_Eventfk
+		FOREIGN KEY (EVENT_ID)
+		REFERENCES CATERING_EVENT(EVENT_ID)			
+);-- INVOICE starts at 10000
+
+create table PRODUCT(
+	PRODUCT_NUM varchar(10) not null,
+	DESCRIPTION varchar(50) not null,
+	UNIT_PRICE float,
+	CONSTRAINT PRODUCT_pk PRIMARY KEY (PRODUCT_NUM)
+); --PRODUCTS start at 10001
+
+create table LINE_ITEM(
+	QUANTITY number(10) not null,
+	PRODUCT_NUM varchar(10),
+	INVOICE_NUM varchar(10),
+	CONSTRAINT LINE_ITEM_pk PRIMARY KEY (PRODUCT_NUM,INVOICE_NUM),
+);
+
+create table STAFF(
+	STAFF_ID varchar(10) not null,
+	FNAME varchar(15),
+	LNAME varchar(15),
+	EMP_STARTDATE date, 
+	ADDRESS varchar(30),
+	CITY varchar(15),
+	STATE char(2),
+	ZIP varchar(5),
+	EMAIL varchar(50),
+	CPHONE varchar(15),
+	CONSTRAINT STAFF_pk PRIMARY KEY (STAFF_ID)
+); -- STAFF starts at 2000
+
+create table SKILL(
+	SKILL_ID varchar(4) not null,
+	DESCRIPTION varchar(50),
+	STAFF_ID varchar(10),
+	CONSTRAINT SKILL_pk PRIMARY KEY (SKILL_ID,STAFF_ID),
+	CONSTRAINT SKILL_STAFFfk
+		FOREIGN KEY (STAFF_ID)
+		REFERENCES STAFF(STAFF_ID)
+		ON DELETE SET NULL
+); -- SKILL starts at 001
+
+create table TEMP_AGENCY(
+	TEMPAGENCY_ID varchar(10) not null, 
+	AGENCY_NAME varchar(30) not null, 
+	ADDRESS varchar(50),
+	CITY varchar(30),
+	STATE char(2),
+	ZIP  varchar(5),
+	PHONE varchar(15),
+	CONSTRAINT TEMP_AGENCY_pk PRIMARY KEY (TEMPAGENCY_ID)
+); -- TEMP_AGENCY starts at 500-509
+
+create table PART_TIME(
+	STAFF_ID varchar(10) not null,
+	TEMPAGENCY_ID varchar(10),
+	CONSTRAINT PART_TIME_pk PRIMARY KEY (STAFF_ID),
+	CONSTRAINT PART_TIME_fk
+		FOREIGN KEY (TEMPAGENCY_ID)
+		REFERENCES TEMP_AGENCY(TEMPAGENCY_ID)
+);
+
+create table FULL_TIME(
+	STAFF_ID varchar(10) not null,
+	SALARY varchar(10),
+	INSURANCE_PLAN varchar(15),
+	CONSTRAINT FULL_TIME_pk PRIMARY KEY (STAFF_ID)
+);
+
+create table EVENT_STAFF(
+	START_TIME timestamp(6),
+	END_TIME timestamp(6),
+	STAFF_ID varchar(10),
+	EVENT_ID varchar(10),
+	CONSTRAINT EVENTSTAFF_PK PRIMARY KEY (STAFF_ID,EVENT_ID)
+);
+
+
+
+
+////////////////////////////////////
+
+drop table customers;
+drop table invoice;
+drop table catering_event;
+drop table line_item;
+drop table event_staff;
+drop table staff;
+drop table skill;
+drop table tempagency;
+drop table part_time;
+drop table full_time;
+drop table products;
